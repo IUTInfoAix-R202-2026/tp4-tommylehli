@@ -35,10 +35,15 @@ public class FormulaireConnexionController {
     // - labelStatut      <-  statutProperty      (sens unique)
     // - boutonValider désactivé tant que le formulaire n'est pas validable :
     //     boutonValider.disableProperty().bind(viewModel.validableProperty().not());
+    champIdentifiant.textProperty().bindBidirectional(viewModel.identifiantProperty());
+    champMotDePasse.textProperty().bindBidirectional(viewModel.motDePasseProperty());
+    labelStatut.textProperty().bind(viewModel.statutProperty());
+    boutonValider.disableProperty().bind(viewModel.validableProperty().not());
   }
 
   @FXML
   private void surValider() {
     // TODO exercice 3 : déclencher la commande de connexion.
+    viewModel.connecterCommand();
   }
 }
