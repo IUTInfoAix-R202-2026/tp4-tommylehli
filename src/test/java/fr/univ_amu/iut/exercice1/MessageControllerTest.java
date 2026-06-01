@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -25,7 +24,6 @@ class MessageControllerTest {
     new MessageApp().start(stage);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void au_demarrage_l_apercu_reflete_le_texte_initial(FxRobot robot) {
     Label apercu = robot.lookup("#labelApercu").queryAs(Label.class);
@@ -34,7 +32,6 @@ class MessageControllerTest {
         .isEqualTo("Aperçu : Bonjour MVVM");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void saisir_dans_le_champ_met_a_jour_l_apercu(FxRobot robot) {
     TextField champ = robot.lookup("#champTexte").queryAs(TextField.class);

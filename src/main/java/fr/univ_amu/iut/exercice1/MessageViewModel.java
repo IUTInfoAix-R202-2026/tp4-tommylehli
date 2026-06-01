@@ -1,5 +1,6 @@
 package fr.univ_amu.iut.exercice1;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -40,6 +41,12 @@ public class MessageViewModel {
     // 3. Lier `apercu` (lecture seule pour la vue) à une version dérivée de
     //    `texte` : le texte saisi précédé de la mention "Aperçu : ".
     //    Astuce : Bindings.concat("Aperçu : ", texte).
+    texte.set(message.getTexte());
+    texte.addListener(
+        (observable, oldValue, newValue) -> {
+          message.setTexte(newValue);
+        });
+    apercu.bind(Bindings.concat("Aperçu : ", texte));
   }
 
   public StringProperty texteProperty() {
