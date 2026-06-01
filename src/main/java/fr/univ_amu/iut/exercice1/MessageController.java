@@ -36,5 +36,7 @@ public class MessageController {
     // - Liaison SIMPLE (sens unique) de l'apercu : il se contente d'afficher
     //   ce que le ViewModel calcule :
     //     labelApercu.textProperty().bind(viewModel.apercuProperty());
+    champTexte.textProperty().bindBidirectional(viewModel.texteProperty());
+    labelApercu.textProperty().bind(viewModel.apercuProperty());
   }
 }
