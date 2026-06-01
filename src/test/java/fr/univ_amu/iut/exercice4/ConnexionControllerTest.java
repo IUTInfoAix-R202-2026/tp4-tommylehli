@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -40,7 +39,6 @@ class ConnexionControllerTest {
     return robot.lookup("#labelStatut").queryAs(Label.class).getText();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_fenetre_s_ouvre_avec_le_formulaire(FxRobot robot) {
     assertThat(robot.lookup("#champIdentifiant").tryQuery())
@@ -49,7 +47,6 @@ class ConnexionControllerTest {
     assertThat(robot.lookup("#boutonValider").tryQuery()).isPresent();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void au_demarrage_le_bouton_est_desactive(FxRobot robot) {
     Button valider = robot.lookup("#boutonValider").queryAs(Button.class);
@@ -58,7 +55,6 @@ class ConnexionControllerTest {
         .isTrue();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void se_connecter_via_guice_affiche_la_bienvenue(FxRobot robot) {
     saisir(robot, "marie", "chiro2026");
@@ -69,7 +65,6 @@ class ConnexionControllerTest {
         .isEqualTo("Bienvenue marie !");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void un_mauvais_mot_de_passe_affiche_l_erreur(FxRobot robot) {
     saisir(robot, "marie", "mauvais");

@@ -1,5 +1,6 @@
 package fr.univ_amu.iut.exercice4;
 
+import com.google.inject.Inject;
 import fr.univ_amu.iut.exercice3.ServiceAuth;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -27,6 +28,7 @@ public class ConnexionViewModel {
   private final StringProperty statut = new SimpleStringProperty("");
   private final BooleanProperty validable = new SimpleBooleanProperty(false);
 
+  @Inject
   // TODO exercice 4 : annoter ce constructeur avec @Inject pour que Guice
   // sache l'utiliser et lui fournir le ServiceAuth.
   public ConnexionViewModel(ServiceAuth serviceAuth) {

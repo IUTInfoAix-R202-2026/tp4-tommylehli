@@ -1,8 +1,11 @@
 package fr.univ_amu.iut.exercice4;
 
+import com.google.inject.Guice;
 import com.google.inject.Injector;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -31,6 +34,12 @@ public class ConnexionApp extends Application {
     // 4. Parent racine = loader.load();
     //    stage.setScene(new Scene(racine));
     //    stage.show();
+    Injector injector = Guice.createInjector(new AppModule());
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("ConnexionView.fxml"));
+    loader.setControllerFactory(injector::getInstance);
+    Parent racine = loader.load();
+    stage.setScene(new Scene(racine));
+    stage.show();
   }
 
   public static void main(String[] args) {
