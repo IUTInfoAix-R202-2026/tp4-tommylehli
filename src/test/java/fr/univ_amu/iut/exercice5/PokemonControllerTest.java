@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -33,7 +32,6 @@ class PokemonControllerTest {
     return robot.lookup("#table").queryAs(TableView.class);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void au_demarrage_la_table_affiche_les_pokemon_de_depart(FxRobot robot) {
     assertThat(table(robot).getItems())
@@ -41,7 +39,6 @@ class PokemonControllerTest {
         .hasSize(6);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void les_colonnes_affichent_les_donnees_du_premier_pokemon(FxRobot robot) {
     TableView<Pokemon> t = table(robot);
@@ -50,21 +47,18 @@ class PokemonControllerTest {
     assertThat(t.getColumns().get(2).getCellData(0)).as("colonne type").isEqualTo("Plante");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void le_label_resume_affiche_le_compte(FxRobot robot) {
     Label resume = robot.lookup("#labelResume").queryAs(Label.class);
     assertThat(resume.getText()).isEqualTo("6 Pokémon");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void le_bouton_ajouter_est_desactive_sans_saisie(FxRobot robot) {
     Button ajouter = robot.lookup("#boutonAjouter").queryAs(Button.class);
     assertThat(ajouter.isDisabled()).as("rien n'est saisi au démarrage").isTrue();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void ajouter_un_pokemon_par_son_nom_ajoute_une_ligne(FxRobot robot) {
     TextField champ = robot.lookup("#champRecherche").queryAs(TextField.class);
@@ -81,7 +75,6 @@ class PokemonControllerTest {
         .isEmpty();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void remplir_le_champ_active_le_bouton(FxRobot robot) {
     Button ajouter = robot.lookup("#boutonAjouter").queryAs(Button.class);
@@ -95,7 +88,6 @@ class PokemonControllerTest {
         .isFalse();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void un_nom_inconnu_affiche_un_statut_sans_ajouter(FxRobot robot) {
     TextField champ = robot.lookup("#champRecherche").queryAs(TextField.class);
