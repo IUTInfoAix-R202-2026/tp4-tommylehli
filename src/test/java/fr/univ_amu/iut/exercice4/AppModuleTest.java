@@ -6,7 +6,6 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import fr.univ_amu.iut.exercice3.ServiceAuth;
 import fr.univ_amu.iut.exercice3.ServiceAuthSimple;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -15,7 +14,6 @@ import org.junit.jupiter.api.Test;
  */
 class AppModuleTest {
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void le_module_lie_serviceauth_a_son_implementation_simple() {
     Injector injector = Guice.createInjector(new AppModule());
@@ -27,7 +25,6 @@ class AppModuleTest {
         .isInstanceOf(ServiceAuthSimple.class);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void guice_construit_le_viewmodel_avec_son_service_injecte() {
     Injector injector = Guice.createInjector(new AppModule());
