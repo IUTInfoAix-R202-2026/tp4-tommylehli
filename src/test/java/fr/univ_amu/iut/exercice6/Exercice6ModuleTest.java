@@ -10,7 +10,6 @@ import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.name.Names;
 import com.google.inject.util.Modules;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -25,7 +24,6 @@ import org.junit.jupiter.api.Test;
  */
 class Exercice6ModuleTest {
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void le_journal_est_un_singleton_partage() {
     Injector injector = Guice.createInjector(new Exercice6Module());
@@ -38,7 +36,6 @@ class Exercice6ModuleTest {
         .isSameAs(second);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void le_nom_choisit_l_implementation_du_notifieur() {
     Injector injector = Guice.createInjector(new Exercice6Module());
@@ -51,7 +48,6 @@ class Exercice6ModuleTest {
     assertThat(silencieux).isInstanceOf(NotifieurSilencieux.class);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void un_module_de_test_peut_injecter_un_mock() {
     Notifieur mockNotifieur = mock(Notifieur.class);
@@ -80,7 +76,6 @@ class Exercice6ModuleTest {
         .contains("Pipistrelle detectee");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void le_service_surveillance_se_construit_avec_le_notifieur_nomme() {
     // Sans le bind @Named("console") du module, Guice ne sait pas injecter le
@@ -95,7 +90,6 @@ class Exercice6ModuleTest {
         .contains("Pipistrelle detectee");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void le_journal_singleton_cumule_les_evenements_de_plusieurs_services() {
     Injector injector = Guice.createInjector(new Exercice6Module());
