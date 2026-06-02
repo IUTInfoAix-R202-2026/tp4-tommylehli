@@ -3,6 +3,7 @@ package fr.univ_amu.iut.exercice7;
 import com.google.inject.Inject;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyStringProperty;
@@ -53,6 +54,29 @@ public class QualificationViewModel {
     // 2. verdictGlobalLibelle : "Verdict global : (à saisir)" tant que le verdict
     //    du modèle est vide, sinon "Verdict global : <verdict>".
     //    Astuce : dépend de nuit.verdictGlobalProperty().
+    descriptionSelection.bind(
+        Bindings.createStringBinding(
+            () -> {
+              Sequence seq = sequenceSelectionnee.get();
+              if (seq == null) return ("(sélectionnez une séquence dans le tableau)");
+
+              String heureString = seq.getHorodatage().format(HEURE);
+              double frequence = seq.getFrequenceDominanteKHz();
+              String frequenceFormat = String.format("%.1f kHz", frequence);
+
+              return ("Séquence " + heureString + " - " + frequenceFormat + "kHz");
+            },
+            sequenceSelectionnee));
+
+    verdictGlobalLibelle.bind(
+        Bindings.createStringBinding(
+            () -> {
+              String verdict = nuit.verdictGlobalProperty().get();
+              if (verdict == null || verdict.trim().isEmpty())
+                return ("Verdict global : (à saisir)");
+              else return ("Verdict global : " + verdict);
+            },
+            nuit.verdictGlobalProperty()));
   }
 
   public ObservableList<Sequence> sequencesProperty() {
@@ -91,10 +115,13 @@ public class QualificationViewModel {
   /** Marque la séquence sélectionnée comme "Écoutée". */
   public void ecouterCommand() {
     // TODO exercice 7 : si une séquence est sélectionnée, passer son statut à "Écoutée".
+    Sequence seq = sequenceSelectionnee.get();
+    if (seq != null) seq.setStatut("Écoutée");
   }
 
   /** Enregistre le verdict saisi dans le modèle de la nuit. */
   public void enregistrerVerdictCommand() {
     // TODO exercice 7 : recopier le verdict saisi dans le modèle (nuit.setVerdictGlobal).
+    nuit.setVerdictGlobal(verdictSaisi.getValue());
   }
 }

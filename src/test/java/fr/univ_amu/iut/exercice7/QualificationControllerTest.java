@@ -7,7 +7,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -32,20 +31,17 @@ class QualificationControllerTest {
     return robot.lookup("#tableSequences").queryAs(TableView.class);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_table_affiche_les_dix_sequences(FxRobot robot) {
     assertThat(table(robot).getItems()).as("la TableView doit être peuplée").hasSize(10);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void le_bouton_ecouter_est_desactive_sans_selection(FxRobot robot) {
     Button ecouter = robot.lookup("#boutonEcouter").queryAs(Button.class);
     assertThat(ecouter.isDisabled()).as("rien n'est sélectionné au démarrage").isTrue();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void selectionner_une_ligne_active_le_bouton_et_decrit_la_selection(FxRobot robot) {
     robot.interact(() -> table(robot).getSelectionModel().select(0));
@@ -57,7 +53,6 @@ class QualificationControllerTest {
     assertThat(selection.getText()).startsWith("Séquence 20:00 - ");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void ecouter_passe_la_sequence_au_statut_ecoutee(FxRobot robot) {
     robot.interact(() -> table(robot).getSelectionModel().select(0));
@@ -68,7 +63,6 @@ class QualificationControllerTest {
     assertThat(table(robot).getItems().get(0).getStatut()).isEqualTo("Écoutée");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @SuppressWarnings("unchecked")
   void la_choicebox_propose_les_trois_verdicts(FxRobot robot) {
@@ -76,7 +70,6 @@ class QualificationControllerTest {
     assertThat(choix.getItems()).containsExactly("OK", "Douteux", "À jeter");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @SuppressWarnings("unchecked")
   void enregistrer_un_verdict_via_la_vue_met_a_jour_le_libelle(FxRobot robot) {

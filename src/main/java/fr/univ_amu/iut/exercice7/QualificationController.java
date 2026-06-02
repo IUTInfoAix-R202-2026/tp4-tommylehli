@@ -3,7 +3,10 @@ package fr.univ_amu.iut.exercice7;
 import com.google.inject.Inject;
 import fr.nedjar.vigiechiro.audio.AudioView;
 import java.nio.file.Path;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -65,6 +68,44 @@ public class QualificationController {
     // 6. zoneCommentaire <-> commentaireProperty (bidirectionnel).
     // 7. choiceVerdict : items = viewModel.listeVerdicts(), valeur <-> verdictSaisiProperty.
     // 8. labelVerdictGlobal <- verdictGlobalLibelleProperty.
+
+    colHorodatage.setCellValueFactory(
+        c -> {
+          LocalTime horodatage = c.getValue().getHorodatage();
+          String heureString = horodatage.format(HEURE);
+          return new SimpleStringProperty(heureString);
+        });
+
+    colFrequence.setCellValueFactory(
+        c -> {
+          double frequence = c.getValue().getFrequenceDominanteKHz();
+          String frequenceString = String.format("%.1f kHz", frequence);
+          return new SimpleStringProperty(frequenceString);
+        });
+
+    colDuree.setCellValueFactory(
+        c -> {
+          int duree = c.getValue().getDureeSecondes();
+          return new SimpleStringProperty(duree + " s");
+        });
+
+    colStatut.setCellValueFactory(
+        c -> {
+          String statut = c.getValue().getStatut();
+          return new SimpleStringProperty(statut);
+        });
+
+    tableSequences.setItems(viewModel.sequencesProperty());
+    viewModel
+        .sequenceSelectionneeProperty()
+        .bind(tableSequences.getSelectionModel().selectedItemProperty());
+    labelSelection.textProperty().bind(viewModel.descriptionSelectionProperty());
+    boutonEcouter.disableProperty().bind(viewModel.peutEcouterProperty().not());
+    zoneCommentaire.textProperty().bindBidirectional(viewModel.commentaireProperty());
+
+    choiceVerdict.setItems(FXCollections.observableList(viewModel.listeVerdicts()));
+    choiceVerdict.valueProperty().bindBidirectional(viewModel.verdictSaisiProperty());
+    labelVerdictGlobal.textProperty().bind(viewModel.verdictGlobalLibelleProperty());
   }
 
   @FXML
